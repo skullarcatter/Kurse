@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurse</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Set initial background color to black */
+            color: #fff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 200px;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #333;
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .search-bar:focus {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-button {
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Settings Menu */
+        .settings-menu {
+            position: absolute;
+            top: 40px; /* Adjust the distance from the header */
+            right: 10px;
+            background-color: #333;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+        }
+
+        .settings-tab {
+            cursor: pointer;
+        }
+
+        .settings-tab:hover + .settings-menu,
+        .settings-menu:hover {
+            display: block;
+        }
+
+        /* Add some style to the settings tab */
+        .settings-tab {
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Tab title input */
+        .tab-title-input {
+            margin-top: 10px;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .update-title-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .update-title-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kurse</h1>
+        <div class="settings-tab">Tabcloak by Kursedev (Beta)</div>
+        <div class="settings-menu">
+            <input type="text" class="tab-title-input" placeholder="Enter New Tab Title">
+            <button class="update-title-button" onclick="updateTabTitle()">Update Tab Title</button>
+        </div>
+    </header>
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search...">
+        <button onclick="search()" class="search-button">Search</button>
+    </div>
+
+    <script>
+        function search() {
+            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            switch (searchTerm) {
+                case 'google':
+                    window.open('https://www.google.com/#ib0w3beNCsZ3DUUxqsOWGol8gnGdvQSbKdG5sOQGw4hWwqugbvyNrA1H8d9R8XXOcgs5cKHmRl7m88RSGKIPTLhaFq6SenWMTYAsvuaVa9AgyJQACQSAUisZGho7ZAS7NyvfXIlHitnuKrMwnEMURfyDoQxt7gKXqvnKYj8vFS2rFzvQG0YwleHgco1PPDWihsUGZCnmzEFN1xBIxbwBQ5yAq46R8lpnS8ZqHJdtzPts91uFY49rPHchzgZH8ujlTHmhhheOcqw0IyeQblAxMoCKUEnqfqhzQe50iVgIut3N7ey9GXw3Y3cKk0mxU0hAO2cxFUY1efISHzR3jtLQW8VJVYdbKVTmxn5tkeEa97f5WfUYa9Kohhi8ngizlSZVJjBbgfPwQO6OvD7GL5JY8r5yc6KKMLabM7st7y64qRIhk9mE672G51vzt4MauhLwlMVpkeIuA8HwsbuG2L2UMrzx5Fucg8UzPRHbLiY6Z2BEnSXjBcpetranslate.google.comU20FO7pYZTrf86AaTRw3Wu6Ob9t4T7XLQ8XGLsSskmA2uk6cId5cAm1K4uIt1DrKNANfeRaiDM0evOARRPmLxcS8ZjwzySWJWAu3udxQ9FXR84DQlQX5T5GS1rmq6kg6jVXFfE01FXTBmQkphB772CopfaoV6pBKqFK5HKAqnQiPvDj1DamyWWPDj5Dy52vwCXYel1gVIM350UEKbFyFI0h01ZyjPmE0LnvjshnwwD2thIjCoy6UatyoMG6ZqrR0Hdf3hsb351lOgvTHuI3VY0znIFpdc1sebpy1GAzU9AXI8OJ3U63kxnERsIkSgRw0zLTaqSJgbh4wwhDRFMjCJiOrSsUu3pmCWiJrlyhrLjxKvN9oa96qlOVr1F4SE5AjvShLCepgIQrGl1sKOcpSOHi3LhiFcF5JHry7YbRtMuKDufmJ1EjtQLtGlmaLY5OrNLVNjkeCu7rJznuMKgRh02PBIx2yswql0iYlZQQX3bGhUf3z8upx', '_blank');
+                    break;
+                case 'discord':
+                    window.open('https://discord.com/#DNl4ImSNBkUCNpFM8MBKys74i2WKSJlKgZSWiwjJvt6uWAEzH0IfWBl5iUPKvuPs6XBuBgG1vQpwXxp1r8RjVBPp0poFZZjnCOlhUaLH2B93iqm8Ji9dWw0hRNjLSuDHoXrXj526UzqLWIrc2jcnJJJSPOLVprWM1uMfZ38Jffwt7p7fOs6iABGuHMcdBSS4WXc2VOpHtly2l04dCb8SrkvzYiCe7TrALzz6DsJQAlsyQnmUnLAWe6ALJVCrn6BbCrU00BKPOpw3PcV62WWXPgLtlcjQxZMu8kWUEFotkAQWRkOvfOKtkcUEtrk7p1r4Scxfpai2l5uC8wRNA4VTWbA908YMpsqYNMfdemleCHRpJP1dMAOcZcvpv7wNPgrV74rkq3Pr7tJ11ofqitgiYyBDNx4hwzJyQUg7LL7j0IaEgTga2hkCbeJgClcKNDoBiN7ruWvvdn6r3A81xoXM5A7M37HftTcWaYmLAsJkhdIqcc28OlsMtranslate.google.comR9VCsjZxgbvA690Yf5IWkqmGrmHtmnDxKSYuHkb7kvp1GpcoUN73a6wc2EohsCBDDWqGXTa8hsIUR7nFgSuE2hGsAJxm89e1jx4AFR5DyykKQuQkC4RsT38leilwm20ZPgTlnGw1jFspIfYq9GSdnHaBmgVlrdV35xhKGYdfwopehzlJglI3gulI9sUbsfnnAJH4KBjQWQFQI8d3nRVsPhX42PbcqavBicNtD855IX8y3HwBoIAJygK8l7HvJCDW195DeSdCjK9KBPztSJBzDKzni9RoXd5sIcsiS5avS4po4x1MeIMdWw3PcmIfqZHssuN6k3fVLHGTKd7E0bRHaJwK79jqO8bQzMySkrK7C8zPgy2HD3AOg8W1ScqpiJP5L52ZiRDUYrmZWnl3WNdxtIkMuiNwWfIjlM0DExYXf6qfQaS1pXedtWz36fKbNcl6hpPmvBQqBckNQjX5mNUXcdzR52Ncw2pa7YcE5vZzXTGWBv687LE4', '_blank');
+                    break;
+                case 'youtube':
+                    window.open('https://www.youtube.com/#SdcD0q8WFeJSatSsCnuqzzubsN5NqMr11SgmON3aMTRWDDqekis4v7KtFBXn9zdYExRTNM77CMAdooTTz1mCBSx71USxpxKvwJt3yUnSEJfLyQRQcTvUwdQZqduTzQ3cC3VnVwdQUic1K6y9IkmAaKpB9ZrkO8BrftlUKa20UTBCaLcpENmsVGQzEDIFqFQUakO88anPYZr2YBC4RdMGBxW3ovIPfRVfjfhGoLlDLb4lDgPICirt0qRAUGbtLo8u8qOkVFrxsOKvcZ4IecW3ZkzFdbHWhEZLwhpD4Im0ITewM2m4JAELDObBzy1x9Q7LmBDdggmrO7Kf5xThjF2q2BfDraQ0CRNwUzf07NWgqXQ1Qg1CeBPw59XL2OwJdIT1ZYiXpqIEbDmHNUEs5mmtpcNnK78P7pGwV1mPaHbygQoETQITmz7jvFWTbgtIyhkFvycbXVkbVELNh6RAqkttGDQ6Z0qpzY4eEiFFmffYnuBHoM2ZqVOAtranslate.google.com8O4Im7eVv1XR1QlNfgrrzCCKZBIESOatMPVnaBsWlWYUGdFRabvu3WG3HgUXOQo0qt3fFOyOYFgpzOj4kgMMTnQdtcO3ELFkn7WPl3ZrxGPoJ7rEkoGmBv3gvgyf9i3R7URMWQf5vv1WgBXnOlQqnC5CDvcLXvnLTVDuUz3ethduRd58yFABOiDANEv8WtfqhMqBnTaqiQl5ebONfvpyZgfrvQwIg2xj5MgG0vJwrKpwbe6DymUZSvIBhmIjmaSzOGABfBpWX9D43nIPs4Aw9I1XwpluT14WobMNeVRXU7UcxhIMJuYHiBO9ZhD2srH6UjTCs4oMcfQfm7mItyiNVyVjWmhOZAOalTjxWgJ9apduoZVf3Ile2MMc4yFbwJ18JVhrqTeuYDGf2uVM5NzD69NXjRMIP1ZYzdXX8GTEJpMjJ0SPiJ2Bvq5xSKiOcUHd7rL9moN0sPBgcvRdWuS8qOJHZsotVEnHREozkyEnoxcKXKiUR9rF', '_blank');
+                    break;
+                default:
+                    alert('Unsupported search term. Try "google," "discord," or "youtube."');
+            }
+        }
+
+        function updateTabTitle() {
+            var newTitle = document.querySelector('.tab-title-input').value;
+            document.title = newTitle || 'Kurse';
+        }
+    </script>
+</body>
+</html>
